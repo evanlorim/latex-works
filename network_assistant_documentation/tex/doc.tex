@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{hyperref, framed, color, fancyhdr, graphicx, float, flafter, listings}
+\lstset{basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true}
+\usepackage[top=1in, bottom=1in, left=.5in, right=.5in]{geometry}
+\pagestyle{fancy}
+\definecolor{shadecolor}{rgb}{.8,.8,.8}
+\newcommand{\con}{\textit{ - Continue}}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\title{Setting up an NDT Server on Dell PowerEdge1750}
+\date{\today}
+\author{Evan Mahone\\ St. Mary's College of Maryland\\ Office of Information \& Technology}
+
+\begin{document}
+\maketitle
+\newpage
+%\pagenumbering{gobble}
+
+%INSERT DESCRIPTION
+
+\input{0_prepare.tex}
+\input{1_install.tex}
+\input{2_os_config.tex}
+\input{3_pkg_dep.tex}
+\input{4_compile.tex}
+\input{5_libs.tex}
+\input{6_ndt.tex}
+
+%REMEMBER TO CHANGE OUT HYPERLINKS FOR REAL TEXT
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

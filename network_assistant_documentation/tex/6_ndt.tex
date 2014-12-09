@@ -1,0 +1,61 @@
+\section{The NDT Program}
+This section follows from the NDT cookbook found \href{www.internet2.edu/pubs/ndt-cookbook.pdf‎}{here}.\footnote{www.internet2.edu/pubs/ndt-cookbook.pdf‎}
+\subsection{Builing the NDT Program}
+Make sure that you have installed the JDK version 1.5. To Configure the system to use JDK 1.5 do the following and choose jre 1.5: 
+\begin{snugshade}\begin{lstlisting}
+$ su
+$ /usr/sbin/alternatives --config java
+$ exit
+\end{lstlisting}\end{snugshade}\noindent
+Now download NDT:
+\begin{snugshade}\begin{lstlisting}
+$ cd /usr/src/etc
+$ sudo wget http://software.internet2.edu/sources/ndt/ndt-3.6.2b.tar.gz
+$ sudo tar -xvf ndt-3.6.2b.tar.gz
+\end{lstlisting}\end{snugshade}\noindent
+Now configure and make it:
+\begin{snugshade}\begin{lstlisting}
+$ cd /usr/src/etc/ndt-3.6.2b
+$ sudo ./configure
+$ sudo make
+$ sudo make install
+\end{lstlisting}\end{snugshade}\noindent
+
+\hrule
+
+\subsection{Testing the NDT program}
+In the NDT source directory, run the shell script provided:
+\begin{snugshade}\begin{lstlisting}
+$ cd /usr/src/etc/ndt-3.6.2b 
+$ sudo ./conf/create-html.sh
+\end{lstlisting}\end{snugshade}\noindent
+Following is how i filled out the prompt (where a blank means that I just pressed enter):
+\begin{snugshade}\begin{lstlisting}
+Enter your site name [Internet2]  : test_site_01
+Enter your site's location [Ann Arbor - MI]  : St. Mary's - MD
+Server connection info, enter 1 for 100 Mbps, 2 for 1 Gbps [2]  : 2
+Enter email userid [rcarlson]  : hseldon
+Enter email domain name [internet2.edu]  : smcm.edu
+Enter default subject line [Trouble report from ndt3.smcm.edu]  : 
+The base web page 'tcpbw100.html' has now been created.  You 
+must move this file into the ndt_DATA directory [/usr/local/ndt]
+created during the 'make' process.
+Do you want to install this file now? [yes]  : 
+Enter location [/usr/local/ndt]  : 
+\end{lstlisting}\end{snugshade}\noindent
+Start server processes with the provided sample script:
+\begin{snugshade}\begin{lstlisting}
+$ sudo ./conf/start.ndt
+\end{lstlisting}\end{snugshade}\noindent
+The first time I ran the script, I got the following output: 
+\begin{snugshade}\begin{lstlisting}
+[1] 3515
+[2] 3520
+\end{lstlisting}\end{snugshade}\noindent
+copy the startup script to the init.d directory:
+\begin{snugshade}\begin{lstlisting}
+$ sudo cp ./conf/ndt /etc/init.d/ndt
+\end{lstlisting}\end{snugshade}\noindent
+
+
+

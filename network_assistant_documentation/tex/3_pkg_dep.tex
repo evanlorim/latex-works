@@ -1,0 +1,105 @@
+\section{Installing Package Dependencies}
+
+\subsection{ncurses-devel}
+ncurses-devel is needed for menuconfig
+%would like to find which package has this
+\begin{snugshade}\begin{verbatim}
+$ sudo yum install ncurses-devel.x86_64 -y
+\end{verbatim}\end{snugshade}\noindent
+
+\hrule
+
+\subsection{Python}
+python-devel-2.6.6-37.el6.x86\_64 is needed for configuring the userland libraries.
+\begin{snugshade}\begin{verbatim}
+$ sudo yum install python-devel -y
+\end{verbatim}\end{snugshade}\noindent
+
+\hrule
+
+\subsection{gtk2-devel}
+gtk2-devel is needed for the gutil utility from the userland libraries
+\begin{snugshade}\begin{verbatim}
+$ sudo yum install gtk2-devel -y
+\end{verbatim}\end{snugshade}\noindent
+\hrule
+
+\subsection{gcc Compatability Libraries}
+Gcc compatability libraries are needed for the web100 libraries.
+\begin{snugshade}\begin{lstlisting}
+$ sudo yum install compat-gcc-34-g77
+\end{lstlisting}\end{snugshade}\noindent
+
+
+\subsection{Sun JDK 1.5 Dependencies}
+The following 32-bit packages must be installed in order to get Sun JDK 1.5 working:
+\begin{snugshade}\begin{lstlisting}
+$ sudo yum install libXext.i686 libXt.i686 libXi.i686 libXp.i686 libXtst.i686 -y
+\end{lstlisting}\end{snugshade}\noindent
+The following 32-bit package needs to be installed to get JDK 1.5-alsa support:
+\begin{snugshade}\begin{lstlisting}
+$ sudo yum install alsa-lib.i686 -y
+\end{lstlisting}\end{snugshade}\noindent
+The following package needs to be installed to get JDK 1.5-fonts support:
+\begin{snugshade}\begin{lstlisting}
+$ sudo yum install chfontpath 
+\end{lstlisting}\end{snugshade}\noindent
+As well, we need to link our mkfntdir binary to the path that JDK-1.5-fonts searches:
+\begin{snugshade}\begin{lstlisting}
+$ sudo mkdir X11R6 X11R6/bin
+$ sudo ln -s /usr/bin/mkfontdir /usr/X11R6/bin/mkfontdir
+\end{lstlisting}\end{snugshade}\noindent
+
+\hrule
+
+\subsection{Sun JDK 1.5}
+The following section is based off of instructions \href{http://wiki.centos.org/HowTos/JavaOnCentOS}{here} \footnote{http://wiki.centos.org/HowTos/JavaOnCentOS}.
+\begin{itemize}
+\item{The sun JDK 1.5 is needed in order to build ndt-3.6.4.}
+\item{First, download the Sun JDK 1.5 update 15 rpm and put it in the home directory:}
+\begin{snugshade}\begin{lstlisting}
+$ cd ~
+$ wget http://mirrors.dotsrc.org/jpackage/1.7/generic/SRPMS.non-free/java-1.5.0-sun-1.5.0.15-1jpp.nosrc.rpm
+\end{lstlisting}\end{snugshade}\noindent
+\item{Next download the Sun JDK 1.5 update 15 self extracting binary from here: \href{http://www.oracle.com/technetwork/java/archive-139210.html}{here}. \footnote{http://www.oracle.com/technetwork/java/archive-139210.html}.}
+\item{It should be named \textit{jdk-1\_5\_0\_15-linux-i586.bin}}
+\item{Move the downloaded file to the \textit{/home/seldon/rpmbuild/SOURCES} directory}
+\item{Make it executable}
+\end{itemize}
+\begin{snugshade}\begin{lstlisting}
+$ chmod +x ~/rpmbuild/SOURCES/jdk-1_5_0_15-linux-i586.bin
+\end{lstlisting}\end{snugshade}\noindent
+In order to build the package, you must set your computer to emulate a different architecture, that is: 
+\begin{snugshade}\begin{lstlisting}
+$ setarch i586
+\end{lstlisting}\end{snugshade}\noindent
+now build the rpm file:
+\begin{snugshade}\begin{lstlisting}
+$ rpmbuild --rebuild java-1.5.0-sun-1.5.0.15-1jpp.nosrc.rpm
+\end{lstlisting}\end{snugshade}\noindent
+if the installation goes over well you can \textit{unset} the i586 architecture:
+\begin{snugshade}\begin{lstlisting}
+$ exit
+\end{lstlisting}\end{snugshade}\noindent
+now install all of the rpms as root:
+\begin{snugshade}\begin{lstlisting}
+$ su 
+# cd /home/seldon/rpmbuild/RPMS/i586
+# rpm -Uvh java-1.5.0-sun-1.5.0.15-1jpp.i586.rpm
+# rpm -Uvh java-1.5.0-sun-alsa-1.5.0.15-1jpp.i586.rpm
+# rpm -Uvh --nodeps java-1.5.0-sun-fonts-1.5.0.15-1jpp.i586.rpm
+# rpm -Uvh java-1.5.0-sun-plugin-1.5.0.15-1jpp.i586.rpm
+# rpm -Uvh java-1.5.0-sun-devel-1.5.0.15-1jpp.i586.rpm
+# exit
+\end{lstlisting}\end{snugshade}\noindent
+
+
+
+
+
+
+
+
+
+
+\newpage

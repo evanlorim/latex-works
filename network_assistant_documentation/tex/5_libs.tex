@@ -1,0 +1,58 @@
+\section{Configuring Libraries}
+
+\subsection{Getting and Unpacking Libraries}
+Getting and unpacking userland libraries:
+\begin{snugshade}\begin{verbatim}
+$ sudo mkdir /usr/src/etc
+$ cd /usr/src/tars
+$ sudo wget http://www.web100.org/download/userland/version1.8/web100_userland-1.8.tar.gz 
+$ sudo tar -xvf web100_userland-1.8.tar.gz
+$ sudo mv ./web100_userland-1.8 /usr/src/etc/web100_userland-1.8
+$ sudo mv ./libpcap-1.4.0 /usr/src/etc
+\end{verbatim}\end{snugshade}\noindent
+Getting and unpacking libpcap libraries:
+\begin{snugshade}\begin{verbatim}
+$ cd /usr/src/tars
+$ sudo wget http://www.tcpdump.org/release/libpcap-1.4.0.tar.gz
+$ sudo tar -xvf libpcap-1.4.0.tar.gz
+$ sudo mv ./libpcap-1.4.0 /usr/src/etc
+\end{verbatim}\end{snugshade}\noindent
+
+\hrule
+
+\subsection{Making and Installing Userland Libraries}
+Configure, make and install userland:
+\begin{snugshade}\begin{verbatim}
+$ cd /usr/src/etc/web100_userland-1.8
+$ sudo ./configure 
+$ sudo make
+$ sudo make install
+\end{verbatim}\end{snugshade}\noindent
+Configure make and install libpcap:
+\begin{snugshade}\begin{verbatim}
+$ cd /usr/src/etc/libpcap-1.4.0
+$ sudo ./configure 
+$ sudo make
+$ sudo make install
+\end{verbatim}\end{snugshade}\noindent
+Additionally, you need to make links. Add the following line to /etc/ld.so.conf 
+\begin{snugshade}\begin{lstlisting}
+/usr/local/lib
+\end{lstlisting}\end{snugshade}\noindent
+you can do this via:
+\begin{snugshade}\begin{lstlisting}
+$ sudo nano /etc/ld.so.conf
+\end{lstlisting}\end{snugshade}\noindent
+now execute the command:
+\begin{snugshade}\begin{lstlisting}
+$ sudo /sbin/ldconfig
+\end{lstlisting}\end{snugshade}\noindent
+
+\hrule
+
+\newpage
+
+
+
+
+

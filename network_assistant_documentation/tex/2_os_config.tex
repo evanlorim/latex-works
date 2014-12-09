@@ -1,0 +1,71 @@
+\section{Configuring CentOS}
+\begin{itemize}
+\item{Note that for all times that I user \textit{seldon} you can replace it with the user you registered.}
+\item{Before doing anything else, install the software updates by going to the applications menu : administrative : software update and entering the root password (foobar)}
+\end{itemize}
+
+\subsection{Giving Root Priveleges}
+\textit{Before doing the following, make sure you know basically how to use vim. Refer \href{http://maeks84.wordpress.com/2008/05/29/how-to-use-visudo/}{here} for how to use vim / visudo.}\footnote{http://maeks84.wordpress.com/2008/05/29/how-to-use-visudo/}\\\\
+Open a terminal and type the following (password is foobar):
+\begin{snugshade}\begin{verbatim}
+	$ su
+	# sudo /usr/bin/visudo
+\end{verbatim}\end{snugshade}\noindent
+Move to the bottom of the document, and add the following lines:
+\begin{snugshade}\begin{verbatim}
+#giving root priveleges to seldon
+seldon	ALL=(ALL)	ALL
+\end{verbatim}\end{snugshade}\noindent
+Save and exit, and you should now be able to use sudo. Whenever you use sudo you will have to type in the users password, not the root password (foobar).\\
+\hrule
+
+\subsection{Enabling EPEL repository in yum}
+\begin{snugshade}\begin{verbatim}
+$ sudo rpm -Uvh http://mirrors.kernel.org/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
+\end{verbatim}\end{snugshade}\noindent
+Check to ensure EPEL was enabled by issuing the command:
+\begin{snugshade}\begin{verbatim}
+$ yum repolist
+\end{verbatim}\end{snugshade}\noindent
+EPEL should be listed in there somewhere.\\
+\hrule
+
+\subsection{Enabling nux-desktop Repository in Yum}
+\begin{snugshade}\begin{verbatim}
+$ sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el6/x86_64/nux-dextop-release-0-1.el6.nux.noarch.rpm 
+\end{verbatim}\end{snugshade}\noindent
+Check to ensure nux-desktop was enabled by issuing the command:
+\begin{snugshade}\begin{verbatim}
+$ yum repolist
+\end{verbatim}\end{snugshade}\noindent
+nux-desktop should be listed somewhere in there
+\hrule
+
+\subsection{Installing Chromium (optional)}
+Open a terminal and type the following:
+\begin{snugshade}\begin{verbatim}
+$ cd /etc/yum.repos.d
+$ sudo wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo
+$ sudo yum install chromium -y
+\end{verbatim}\end{snugshade}\noindent
+You can use chromium with the chromium command or from the applications menu.\\
+\hrule
+
+\subsection{Installing Shutter (optional)}
+Shutter is a tool for screen capture.
+\begin{snugshade}\begin{verbatim}
+$ sudo yum install shutter -y
+\end{verbatim}\end{snugshade}\noindent
+You can use shutter via the command shutter.\\
+\hrule
+
+\subsection{Setting Up RPM Build Environment}
+These instructions are based off of the ones found \href{http://wiki.centos.org/HowTos/SetupRpmBuildEnvironment}{here}\footnote{http://wiki.centos.org/HowTos/SetupRpmBuildEnvironment}
+\begin{snugshade}\begin{verbatim}
+$ mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+$ echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
+\end{verbatim}\end{snugshade}\noindent
+
+\hrule
+
+\newpage

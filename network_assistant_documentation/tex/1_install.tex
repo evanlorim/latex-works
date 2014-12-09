@@ -1,0 +1,87 @@
+\section{Installing CentOS v6.4}\label{sec}
+For the following I chose packages which were a mix of minimal desktop and basic server described \href{http://unix.stackexchange.com/questions/20379/centos-6-default-installation-options}{here}\footnote{http://unix.stackexchange.com/questions/20379/centos-6-default-installation-options}. I also included packages that I knew I needed later for configuring NDT. I also changed the default desktop to Xfce instead of gnome as I found it performed better on the server. 
+
+\begin{itemize}
+\item{If you haven't already, perform the check on the installation media \con}
+\item{Choose to install with video driver \con}
+\item{Language: English (English) \con}
+\item{Keyboard: U.S. English \con}
+\item{Type of devices: basic storage devices \con}
+\item{Choose to perform a fresh installation \con}
+\item{Hostname: ndt3.smcm.edu \con}
+\item{Nearest city in time zone: America/New York \con}
+\item{Choose a root password (mine is foobar) \con}
+\item{Choose to make a custom partition layout, using the three partitions described below} 
+\begin{enumerate}
+\item{\textbf{boot}: standard partition, mountpoint: /boot, filesystem: ext4, fixed size: 1024 MB}
+\item{\textbf{swap}: standard partition, filesystem: swap, fixed size: 8192 MB. Based on \href{https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/System_Administration_Guide/Swap_Space.html}{this}}\footnote{https://access.redhat.com/site/documentation/en-US/Red\_Hat\_Enterprise\_Linux/4/html/System\_Administration\_Guide/Swap\_Space.html}
+\item{\textbf{root}: standart partition, mountpoint: /, filesystem: ext4, fill to maximum allowable size}
+\end{enumerate}
+\item{\con}
+\item{install bootloader on /dev/sda \con}
+\subsection{Package Configuration}
+\item{from the list of installation types, choose minimal install}
+\item{choose to add an additional software repository}
+\begin{itemize}
+\item{\textbf{repository name}: epel-release-6-8.noarch}
+\item{\textbf{repository type}: HTTP/FTP}
+\item{\textbf{repository url}: http://dl.fedoraproject.org/pub/epel/6/x86\_64/}
+\end{itemize}
+\item{Choose customize now \con}
+\item{On the packages screen, check only the following:}
+\begin{itemize}
+\item{APPLICATIONS}
+	\begin{itemize}
+	\item{Internet Browser}
+	\end{itemize}
+\item{BASE SYSTEM}
+	\begin{itemize}
+	\item{Base}
+	\item{Compatability Libraries}
+	\item{Debugging Tools}
+	\item{Hardware Monitoring Tools}
+	\item{Performance Tools}
+	\end{itemize}
+\item{DESKTOP}
+	\begin{itemize}
+	\item{Desktop Debugging}
+	\item{Fonts}
+	\item{General Purpose Desktop (check only the following under optional packages)}
+		\begin{itemize}
+		\item{gedit}
+		\end{itemize}
+	\item{Graphical Administration Tools}
+	\item{Input Methods}
+	\item{Legacy X Window System Compatability}
+	\item{X Window System}
+	\item{Xfce}
+	\end{itemize}
+\item{DEVELOPMENT}
+	\begin{itemize}
+	\item{Development Tools}
+	\end{itemize}
+\item{SERVERS}
+	\begin{itemize}
+	\item{Server Platform}
+	\end{itemize}
+\end{itemize}
+\item{\con}
+\item{Now let it go through with installation - changing discs if needed}
+\item{Allow the server to reboot after the installation completes}
+\item{When the server reboots wait for the welcome screen to load \con}
+\item{Agree to license \con}
+\item{Create user (below is what I made)}
+\begin{itemize}
+\item{\textbf{username}: seldon}
+\item{\textbf{full name}: seldon}
+\item{\textbf{password}: Asimov03}
+\end{itemize}
+\item{\con}
+\item{Choose the synchronize date and time \con}
+\item{Choose to enable kdump}
+\item{Allow the server to reboot once again.}
+\item{Let it load. A login screen should pop up and you should be able to log in.}
+\item{Make sure to pick to use the default configuration once you log in for the first time.}
+\end{itemize}
+
+\newpage
